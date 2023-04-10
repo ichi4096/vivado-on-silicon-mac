@@ -1,4 +1,4 @@
-# vivado-on-arm-mac
+# vivado-on-silicon-mac
 This is a collection of scripts to install [Xilinx Vivado™](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools.html) on Arm®-based Apple silicon Macs (Tested on M2 MacBook Air with 2022 Edition of Vivado).
 
 ## How to install
@@ -7,13 +7,14 @@ You first need to install [XQuartz](https://www.xquartz.org/) and [Docker®](htt
 
 Additionally make sure to download the Linux Self Extracting Web Installer from the [Xilinx Website](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools.html).
 ### Installation
+1. Download this [tool](https://github.com/ichi4096/vivado-on-silicon-mac/archive/refs/heads/main.zip).
+2. Extract the ZIP by double-clicking it.
 Open a terminal. Then copy & paste:
 ```
-git clone https://github.com/ichi4096/vivado-on-arm-mac/
-cd vivado-on-arm-mac
+cd Downloads/vivado-on-silicon-mac
 caffeinate -i ./install.sh
 ```
-## How does it work
+## How it works
 ### Docker & XQuartz
 This script creates an x64 Docker container running Linux® that is accelerated by [Rosetta 2](https://developer.apple.com/documentation/apple-silicon/about-the-rosetta-translation-environment) via the Apple Virtualization framework. The container has all the necessary libraries preinstalled for running Vivado. It is installed automatically given an installer file that the user must provide. GUI functionality is provided by XQuartz.
 

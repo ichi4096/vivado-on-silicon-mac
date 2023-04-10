@@ -15,7 +15,7 @@ caffeinate -i ./install.sh
 ```
 ## How does it work
 ### Docker & XQuartz
-This script creates an x64 Docker container that is accelerated by [Rosetta 2](https://developer.apple.com/documentation/apple-silicon/about-the-rosetta-translation-environment) via the Apple Virtualization framework. The container has all the necessary libraries preinstalled for running Vivado. It is installed automatically given an installer file that the user must provide. GUI functionality is provided by XQuartz.
+This script creates an x64 Docker container running Linux® that is accelerated by [Rosetta 2](https://developer.apple.com/documentation/apple-silicon/about-the-rosetta-translation-environment) via the Apple Virtualization framework. The container has all the necessary libraries preinstalled for running Vivado. It is installed automatically given an installer file that the user must provide. GUI functionality is provided by XQuartz.
 
 ### USB connection
 A drawback of the Apple Virtualization framework is that there is no implementation for USB forwarding as of when I'm writing this. Therefore, these scripts set up the Xilinx Virtual Cable protocol. Intended to let a computer connect to an FPGA plugged into a remote computer, it allows for the host system to run a XVC server (in this case a software called [xvcd](https://github.com/tmbinc/xvcd)), to which the docker container can connect.
@@ -44,6 +44,8 @@ Apple, Mac, MacBook, MacBook Air, macOS and Rosetta are trademarks of Apple Inc.
 Docker and the Docker logo are trademarks or registered trademarks of Docker, Inc. in the United States and/or other countries. Docker, Inc. and other parties may also have trademark rights in other terms used herein.
 
 Intel and the Intel logo are trademarks of Intel Corporation or its subsidiaries.
+
+Linux® is the registered trademark of Linus Torvalds in the U.S. and other countries.
 
 Oracle, Java, MySQL, and NetSuite are registered trademarks of Oracle and/or its affiliates. Other names may be trademarks of their respective owners.
 

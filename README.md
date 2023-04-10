@@ -1,5 +1,5 @@
 # vivado-on-silicon-mac
-This is a collection of scripts to install [Xilinx Vivado™](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools.html) on Arm®-based Apple silicon Macs (Tested on M2 MacBook Air with 2022 Edition of Vivado).
+This is a collection of scripts to install [Xilinx Vivado™](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools.html) on Arm®-based Apple silicon Macs (Tested on M2 MacBook Air with 2022 Edition of Vivado). It is in no way associated with Xilinx.
 
 ## How to install
 ### Preparations

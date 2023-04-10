@@ -3,7 +3,7 @@ This is a collection of scripts to install [Xilinx® Vivado®](https://www.xilin
 
 ## How to install
 ### Preparations
-You first need to install [XQuartz](https://www.xquartz.org/) and [Docker®](https://www.docker.com/products/docker-desktop/) (make sure to choose "Apple Chip" instead of "Intel Chip"). Then you need to open Docker, go to settings, check "Use Virtualization Framework", go to "Features in Development" and check "Use Rosetta for x86/amd64 emulation on Apple Silicon". These steps cannot be skipped.
+You first need to install [XQuartz](https://www.xquartz.org/) and [Docker®](https://www.docker.com/products/docker-desktop/) (make sure to choose "Apple Chip" instead of "Intel Chip"). Then you need to open Docker, go to settings, check "Use Virtualization Framework", uncheck "Open Docker Dashboard at startup", go to "Features in Development" and check "Use Rosetta for x86/amd64 emulation on Apple Silicon". These steps cannot be skipped.
 
 Additionally make sure to download the Linux Self Extracting Web Installer from the [Xilinx Website](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools.html).
 ### Installation
@@ -11,7 +11,7 @@ Open a terminal. Then copy & paste:
 ```
 git clone https://github.com/ichi4096/vivado-on-arm-mac/
 cd vivado-on-arm-mac
-./install.sh
+caffeinate -i ./install.sh
 ```
 ## How does it work
 ### Docker & XQuartz

@@ -1,5 +1,5 @@
 # vivado-on-arm-mac
-This is a collection of scripts to install [Xilinx® Vivado®](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools.html) on Arm®-based Apple silicon Macs (Tested on M2 MacBook Air with 2022 Edition of Vivado).
+This is a collection of scripts to install [Xilinx Vivado™](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools.html) on Arm®-based Apple silicon Macs (Tested on M2 MacBook Air with 2022 Edition of Vivado).
 
 ## How to install
 ### Preparations
@@ -35,7 +35,7 @@ Note that the scripts are configured such that you automatically agree to Xilinx
 
 This repository contains the modified source code of [xvcd](https://github.com/tmbinc/xvcd) as well as a compiled version which is statically linked against [libusb](https://libusb.info/) and [libftdi](https://www.intra2net.com/en/developer/libftdi/). This is in accordance to the [LGPL Version 2.1](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html), under which both of those libraries are licensed.
 
-Vivado and Xilinx are registered trademarks of Xilinx, Inc.
+Vivado and Xilinx are trademarks of Xilinx, Inc.
 
 Arm is a registered trademark of Arm Limited (or its subsidiaries) in the US and/or elsewhere.
 

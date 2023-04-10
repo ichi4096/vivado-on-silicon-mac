@@ -2,6 +2,13 @@
 This is a collection of scripts to install Xilinx Vivado on ARM-based Macs. (Tested on M2 MacBook Air with 2022 Edition of Vivado)
 
 ## How to install
+### Preparations
+You first need to install [XQuartz](https://www.xquartz.org/) and [Docker](https://www.docker.com/products/docker-desktop/) (make sure to choose "Apple Chip" instead of "Intel Chip"). Then you need to open Docker, go to settings, check "Use Virtualization Framework", go to "Features in Development" and check "Use Rosetta for x86/amd64 emulation on Apple Silicon". These steps cannot be skipped.
+### Installation
+Open terminal. Then type
+   git clone https://github.com/ichi4096/vivado-on-arm-mac/
+   cd vivado-on-arm-mac
+   ./install.sh
 
 ## How does it work
 ### Docker & XQuartz

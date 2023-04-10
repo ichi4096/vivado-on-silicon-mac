@@ -1,6 +1,6 @@
 # vivado-on-arm-mac
 This is a collection of scripts to install Xilinx Vivado on ARM-based Macs. (Tested on M2 MacBook Air with 2022 Edition of Vivado)
-Note that the scripts are configured such that you automatically agree to Xilinx' and 3rd party license agreements by running them.
+
 ## How to install
 
 ## How does it work
@@ -17,3 +17,9 @@ A few environment variables are set such that
 
 1. the GUI is displayed correctly.
 2. Vivado doesn't crash (maybe due to emulation?)
+
+## License information
+The repository's contents are licensed under the Creative Commons Zero v1.0 Universal license.
+Note that the scripts are configured such that you automatically agree to Xilinx' and 3rd party EULAs (which can be obtained by extracting the installer yourself) by running them.
+You also automatically agree to [Apple's software licence agreement](https://www.apple.com/legal/sla/) for Rosetta 2.
+This repository contains the modified source code of [xvcd](https://github.com/tmbinc/xvcd) as well as a compiled version which is statically linked against libusb and libftdi. This is in accordance to the [LGPL Version 2.1](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html), under which both of those libraries are licensed.

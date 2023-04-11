@@ -31,6 +31,8 @@ To start Vivado, simply open the Launch_Vivado app. It might take a while for th
 
 If you want to exchange files with the Vivado instance, you need to store them inside the "vivado-on-silicon-mac" folder. Inside Vivado, the files will be accessible via the "/home/user" folder.
 
+Clipboard copy & paste works with Ctrl-C and Ctrl-V.
+
 ## How it works
 ### Docker & XQuartz
 This script creates an x64 Docker container running Linux® that is accelerated by [Rosetta 2](https://developer.apple.com/documentation/apple-silicon/about-the-rosetta-translation-environment) via the Apple Virtualization framework. The container has all the necessary libraries preinstalled for running Vivado. It is installed automatically given an installer file that the user must provide. GUI functionality is provided by XQuartz.

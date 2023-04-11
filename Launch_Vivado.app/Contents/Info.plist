@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><plist version="1.0">
+<dict>
+	<key>CFBundleDisplayName</key>
+	<string>Launch_Vivado</string>
+	<key>CFBundleExecutable</key>
+	<string>Launch_Vivado</string>
+	<key>CFBundleGetInfoString</key>
+    <string>Launch_Vivado</string>
+    <key>CFBundleVersion</key>
+    <string>1.0</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.0</string>
+	<key>CFBundleIconFile</key>
+	<string>icon</string>
+	<key>CFBundleIconName</key>
+	<string>icon</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.ichi4096.launch_vivado</string>
+</dict>
+</plist>

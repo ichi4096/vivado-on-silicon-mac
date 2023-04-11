@@ -14,6 +14,8 @@ Open a terminal. Then copy & paste:
 cd Downloads/vivado-on-silicon-mac
 caffeinate -i ./install.sh
 ```
+3. Follow the instructions from the terminal. If a window pops up, close it.
+4. Drag and drop the "Launch_Vivado" App into the Applications folder.
 ## How it works
 ### Docker & XQuartz
 This script creates an x64 Docker container running Linux® that is accelerated by [Rosetta 2](https://developer.apple.com/documentation/apple-silicon/about-the-rosetta-translation-environment) via the Apple Virtualization framework. The container has all the necessary libraries preinstalled for running Vivado. It is installed automatically given an installer file that the user must provide. GUI functionality is provided by XQuartz.

@@ -20,7 +20,7 @@ Additionally make sure to download the *Linux Self Extracting Web Installer* fro
 2. Extract the ZIP by double-clicking it.
 Open a terminal. Then copy & paste:
 ```
-cd Downloads/vivado-on-silicon-mac
+cd Downloads/vivado-on-silicon-mac-main
 caffeinate -dim ./install.sh
 ```
 3. Follow the instructions (in yellow) from the terminal. If a window pops up, close it.
@@ -29,7 +29,7 @@ caffeinate -dim ./install.sh
 ### Usage
 To start Vivado, simply open the Launch_Vivado app. It might take a while for the Docker container to start in the background and for Vivado to launch. Additionally, a terminal window will launch. It runs the XVC server as described below and is necessary for programming the FPGAs and closes when Vivado is closed.
 
-If you want to exchange files with the Vivado instance, you need to store them inside the "vivado-on-silicon-mac" folder. Inside Vivado, the files will be accessible via the "/home/user" folder.
+If you want to exchange files with the Vivado instance, you need to store them inside the "vivado-on-silicon-mac-main" folder. Inside Vivado, the files will be accessible via the "/home/user" folder.
 
 Clipboard copy & paste works with Ctrl-C and Ctrl-V.
 

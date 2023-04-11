@@ -24,9 +24,10 @@ cd Downloads/vivado-on-silicon-mac-main
 caffeinate -dim ./install.sh
 ```
 3. Follow the instructions (in yellow) from the terminal. If a window pops up, close it.
-4. Drag and drop the "Launch_Vivado" App into the Applications folder.
-5. Open the Launch_Vivado app. It will fail to launch, which is why you need to open Settings and trust the app in the "Privacy & Security" section.
-6. Open it again and go to Settings again and trust xvcd.
+4. Open the Launch_Vivado app. It will fail to launch, which is why you need to open Settings and trust the app in the "Privacy & Security" section.
+5. Open it again and go to Settings again and trust xvcd.
+6. Close Vivado.
+7. Drag and drop the "Launch_Vivado" App into the Applications folder.
 
 ### Usage
 To start Vivado, simply open the Launch_Vivado app. It might take a while for the Docker container to start in the background and for Vivado to launch. Additionally, a terminal window will launch. It runs the XVC server as described below and is necessary for programming the FPGAs and closes when Vivado is closed.

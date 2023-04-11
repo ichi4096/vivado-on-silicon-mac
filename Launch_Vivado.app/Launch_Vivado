@@ -1,11 +1,1 @@
-#!/bin/zsh
-open -a XQuartz
-open -a Docker
-while ! /usr/local/bin/docker ps &> /dev/null
-do
-open -a Docker
-sleep 5
-done
 
-/usr/local/bin/docker run --rm --name vivado_container --mount type=bind,source="/tmp/.X11-unix",target="/tmp/.X11-unix" --mount type=bind,source="/Users/michi/x64-linux",target="/home/user" --platform linux/amd64 x64-linux sudo -H -u user bash /home/user/start_vivado.sh &
-osascript -e 'tell app "Terminal" to do script "while ! [[ $(ps aux | grep vivado_container | wc -l | tr -d \"\\n\\t \") == \"1\" ]]; do /Users/michi/x64-linux/xvcd/bin/xvcd; sleep 1; done; exit"'

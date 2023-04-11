@@ -1,5 +1,5 @@
 # vivado-on-silicon-mac
-This is a collection of scripts to install [Xilinx Vivado™](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools.html) on Arm®-based Apple silicon Macs (Tested on M2 MacBook Air with 2022 Edition of Vivado). It is in no way associated with Xilinx.
+This is a tool for installing [Xilinx Vivado™](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools.html) on Arm®-based Apple silicon Macs (Tested on M2 MacBook Air with 2022 Edition of Vivado). It is in no way associated with Xilinx.
 
 ## How to install
 ### Preparations
@@ -14,16 +14,24 @@ Open a terminal. Then copy & paste:
 cd Downloads/vivado-on-silicon-mac
 caffeinate -i ./install.sh
 ```
-3. Follow the instructions from the terminal. If a window pops up, close it.
+3. Follow the instructions (in yellow) from the terminal. If a window pops up, close it.
 4. Drag and drop the "Launch_Vivado" App into the Applications folder.
+
+### Usage
+To start Vivado, simply open the Launch_Vivado app. It might take a while for the Docker container to start in the background and for Vivado to launch. Additionally, a terminal window will launch. It runs the XVC server as described below and is necessary for programming the FPGAs and closes when Vivado is closed.
+
+If you want to exchange files with the Vivado instance, you need to store them inside the "vivado-on-silicon-mac" folder. Inside Vivado, the files will be accessible via the "/home/user" folder.
+
 ## How it works
 ### Docker & XQuartz
 This script creates an x64 Docker container running Linux® that is accelerated by [Rosetta 2](https://developer.apple.com/documentation/apple-silicon/about-the-rosetta-translation-environment) via the Apple Virtualization framework. The container has all the necessary libraries preinstalled for running Vivado. It is installed automatically given an installer file that the user must provide. GUI functionality is provided by XQuartz.
 
 ### USB connection
-A drawback of the Apple Virtualization framework is that there is no implementation for USB forwarding as of when I'm writing this. Therefore, these scripts set up the Xilinx Virtual Cable protocol. Intended to let a computer connect to an FPGA plugged into a remote computer, it allows for the host system to run a XVC server (in this case a software called [xvcd](https://github.com/tmbinc/xvcd)), to which the docker container can connect.
+A drawback of the Apple Virtualization framework is that there is no implementation for USB forwarding as of when I'm writing this. Therefore, these scripts set up the Xilinx Virtual Cable protocol. Intended to let a computer connect to an FPGA plugged into a remote computer, it allows for the host system to run an XVC server (in this case a software called [xvcd](https://github.com/tmbinc/xvcd)), to which the docker container can connect.
 
 xvcd is contained in this repository, but with slight changes to make it compile on modern day macOS (compilation requires libusb and libftdi installed via homebrew, though there is a compiled version included). It runs continuously while the docker container is running.
+
+This version of xvcd only supports the FT2232C chip. Other chips could be supported if xvcd were modified accordingly.
 
 ### Environment variables
 A few environment variables are set such that

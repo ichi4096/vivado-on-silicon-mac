@@ -36,6 +36,8 @@ If you want to exchange files with the Vivado instance, you need to store them i
 
 Clipboard copy & paste works with Ctrl-C and Ctrl-V.
 
+You can allocate more/less memory and CPU resources to Vivado by going to the Resources tab in the Docker settings.
+
 ## How it works
 ### Docker & XQuartz
 This script creates an x64 Docker container running Linux® that is accelerated by [Rosetta 2](https://developer.apple.com/documentation/apple-silicon/about-the-rosetta-translation-environment) via the Apple Virtualization framework. The container has all the necessary libraries preinstalled for running Vivado. It is installed automatically given an installer file that the user must provide. GUI functionality is provided by XQuartz.

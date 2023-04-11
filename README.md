@@ -2,17 +2,26 @@
 This is a tool for installing [Xilinx Vivado™](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools.html) on Arm®-based Apple silicon Macs (Tested on M2 MacBook Air with 2022 Edition of Vivado). It is in no way associated with Xilinx.
 
 ## How to install
+Expect the installation process to last about one to two hours.
 ### Preparations
-You first need to install [XQuartz](https://www.xquartz.org/) and [Docker®](https://www.docker.com/products/docker-desktop/) (make sure to choose "Apple Chip" instead of "Intel Chip"). Then you need to open Docker, go to settings, check "Use Virtualization Framework", uncheck "Open Docker Dashboard at startup", go to "Features in Development" and check "Use Rosetta for x86/amd64 emulation on Apple Silicon". These steps cannot be skipped.
+You first need to install [XQuartz](https://www.xquartz.org/) and [Docker®](https://www.docker.com/products/docker-desktop/) (make sure to choose "Apple Chip" instead of "Intel Chip"). Then you need to
+* open Docker, 
+* go to settings,
+* check "Use Virtualization Framework",
+* uncheck "Open Docker Dashboard at startup",
+* go to "Features in Development" and
+* check "Use Rosetta for x86/amd64 emulation on Apple Silicon".
 
-Additionally make sure to download the Linux Self Extracting Web Installer from the [Xilinx Website](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools.html).
+These steps cannot be skipped.
+
+Additionally make sure to download the *Linux Self Extracting Web Installer* from the [Xilinx Website](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools.html).
 ### Installation
 1. Download this [tool](https://github.com/ichi4096/vivado-on-silicon-mac/archive/refs/heads/main.zip).
 2. Extract the ZIP by double-clicking it.
 Open a terminal. Then copy & paste:
 ```
 cd Downloads/vivado-on-silicon-mac
-caffeinate -i ./install.sh
+caffeinate -dim ./install.sh
 ```
 3. Follow the instructions (in yellow) from the terminal. If a window pops up, close it.
 4. Drag and drop the "Launch_Vivado" App into the Applications folder.

@@ -2,7 +2,7 @@
 This is a tool for installing [Xilinx Vivado™](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools.html) on Arm®-based Apple silicon Macs (Tested on M2 MacBook Air with 2022 Edition of Vivado). It is in no way associated with Xilinx.
 
 ## How to install
-Expect the installation process to last about one to two hours.
+Expect the installation process to last about one to two hours and download ~20 GB.
 ### Preparations
 You first need to install [XQuartz](https://www.xquartz.org/) and [Docker®](https://www.docker.com/products/docker-desktop/) (make sure to choose "Apple Chip" instead of "Intel Chip"). Then you need to
 * open Docker, 

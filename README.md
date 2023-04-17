@@ -9,6 +9,8 @@ You first need to install [XQuartz](https://www.xquartz.org/) and [Docker®](htt
 * go to settings,
 * check "Use Virtualization Framework",
 * uncheck "Open Docker Dashboard at startup",
+* go to "Resources"
+* increase Swap to 2GB (if synthesis fails, you may need to increase Memory or Swap)
 * go to "Features in Development" and
 * check "Use Rosetta for x86/amd64 emulation on Apple Silicon".
 

@@ -14,7 +14,7 @@ gtk2-engines-murrine gtk2-engines-pixbuf gnome-themes-standard nano xterm
 RUN apt install -y --no-install-recommends --allow-unauthenticated \
 python3-pip python3-dev build-essential git gcc-multilib g++ \
 ocl-icd-opencl-dev libjpeg62-dev libc6-dev-i386 graphviz make \
-unzip libtinfo5 xvfb libncursesw5 locales
+unzip libtinfo5 xvfb libncursesw5 locales libswt-gtk-4-jni
 
 # create user "user" with password "pass"
 RUN useradd --create-home --shell /bin/bash --user-group --groups adm,sudo user

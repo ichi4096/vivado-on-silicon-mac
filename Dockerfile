@@ -39,4 +39,4 @@ ENV JAVA_OPTS -Dsun.java2d.xrender=false
 ENV DISPLAY host.docker.internal:0
 
 # Without this, Vivado will crash when synthesizing
-ENV LD_PRELOAD /lib/x86_64-linux-gnu/libudev.so.1 /lib/x86_64-linux-gnu/libselinux.so.1 /lib/x86_64-linux-gnu/libgdk-x11-2.0.so.0
+ENV LD_PRELOAD /lib/x86_64-linux-gnu/libudev.so.1 /lib/x86_64-linux-gnu/libselinux.so.1 /lib/x86_64-linux-gnu/libz.so.1 /lib/x86_64-linux-gnu/libgdk-x11-2.0.so.0

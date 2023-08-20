@@ -36,6 +36,17 @@ fi
 
 cd /home/user
 
+VIVADO_VERSION=0
+# checking version
+if [[ $(md5sum -b /home/user/Xilinx*.bin) =~ "e47ad71388b27a6e2339ee82c3c8765f" ]]
+then
+	VIVADO_VERSION=2023
+else
+	VIVADO_VERSION=2022
+fi
+
+echo $VIVADO_VERSION
+
 # Extract installer
 f_echo "Extracting installer"
 chmod +x /home/user/Xilinx*.bin
@@ -52,4 +63,4 @@ done
 # Run installer
 f_echo "You successfully logged into your account. The installation will begin now."
 f_echo "If a window pops up, simply close it to finish the installation."
-/home/user/installer/xsetup -c /home/user/install_config.txt -b Install -a XilinxEULA,3rdPartyEULA
+/home/user/installer/xsetup -c "/home/user/install_config_$VIVADO_VERSION.txt" -b Install -a XilinxEULA,3rdPartyEULA

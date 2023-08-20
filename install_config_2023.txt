@@ -20,7 +20,7 @@ CreateProgramGroupShortcuts=1
 ProgramGroupFolder=Xilinx Design Tools
 
 # Choose whether shortcuts will be created for All users or just the Current user. Shortcuts can be created for all users only if you run the installer as administrator.
-CreateShortcutsForAllUsers=0
+CreateShortcutsForAllUsers=1
 
 # Choose whether shortcuts will be created on the desktop or not.
 CreateDesktopShortcuts=1

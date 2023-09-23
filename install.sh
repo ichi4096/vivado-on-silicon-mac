@@ -61,7 +61,7 @@ cp $installation_binary $script_dir
 
 # Running install script in docker container
 f_echo "Launching Docker container and installation script"
-/usr/local/bin/docker run -it --rm --mount type=bind,source="/tmp/.X11-unix",target="/tmp/.X11-unix" --mount type=bind,source="$script_dir",target="/home/user" --platform linux/amd64 x64-linux bash /home/user/docker.sh
+/usr/local/bin/docker run -it --init --rm --mount type=bind,source="/tmp/.X11-unix",target="/tmp/.X11-unix" --mount type=bind,source="$script_dir",target="/home/user" --platform linux/amd64 x64-linux bash /home/user/docker.sh
 
 # Create App icon
 f_echo "Generating App icon"
@@ -84,7 +84,7 @@ mv icon.icns Launch_Vivado.app/Contents/Resources/icon.icns
 # Launch XQuartz and Docker
 echo '#!/bin/zsh\nopen -a XQuartz\nopen -a Docker\nwhile ! /usr/local/bin/docker ps &> /dev/null\ndo\nopen -a Docker\nsleep 5\ndone\nwhile ! [ -d "/tmp/.X11-unix" ]\ndo\nopen -a XQuartz\nsleep 5\ndone\n' > Launch_Vivado.app/Launch_Vivado
 # Run docker container by starting hw_server first to establish an XVC connection and then Vivado
-echo "/usr/local/bin/docker run --rm --name vivado_container --mount type=bind,source=\"/tmp/.X11-unix\",target=\"/tmp/.X11-unix\" --mount type=bind,source=\""$script_dir"\",target=\"/home/user\" --platform linux/amd64 x64-linux sudo -H -u user bash /home/user/start_vivado.sh &" >> Launch_Vivado.app/Launch_Vivado
+echo "/usr/local/bin/docker run --init --rm --name vivado_container --mount type=bind,source=\"/tmp/.X11-unix\",target=\"/tmp/.X11-unix\" --mount type=bind,source=\""$script_dir"\",target=\"/home/user\" --platform linux/amd64 x64-linux sudo -H -u user bash /home/user/start_vivado.sh &" >> Launch_Vivado.app/Launch_Vivado
 # Launch XVC server on host
 echo "osascript -e 'tell app \"Terminal\" to do script \" while "'!'" [[ \$(ps aux | grep vivado_container | wc -l | tr -d \\\"\\\\\\\n\\\\\\\t \\\") == \\\"1\\\" ]]; do "$script_dir"/xvcd/bin/xvcd; sleep 1; done; exit\"'" >> Launch_Vivado.app/Launch_Vivado
 chmod +x Launch_Vivado.app/Launch_Vivado

@@ -50,14 +50,19 @@ done
 f_echo "Building Docker image"
 docker build -t x64-linux .
 
-# Copy Vivado installation file into $script_dir
-installation_binary=""
-while ! [[ $installation_binary == *.bin ]]
-do
-	f_echo "Drag and drop the installation binary into this terminal window and press Enter: "
-	read installation_binary
-done
-cp $installation_binary $script_dir
+# Copy Vivado installation file into $script_dir if it is not already there
+found_installation_binary=$(find $script_dir -name "*.bin")
+if [ -z "$found_installation_binary" ]; then
+	installation_binary=""
+	while ! [[ $installation_binary == *.bin ]]
+	do
+		f_echo "Drag and drop the installation binary into this terminal window and press Enter: "
+		read installation_binary
+	done
+	cp $installation_binary $script_dir
+else
+	f_echo "Found installation binary"
+fi
 
 # Running install script in docker container
 f_echo "Launching Docker container and installation script"

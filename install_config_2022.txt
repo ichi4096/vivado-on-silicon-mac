@@ -3,11 +3,11 @@ Edition=Vivado ML Standard
 
 Product=Vivado
 
-# Path where Xilinx software will be installed.
+# Path where AMD FPGAs & Adaptive SoCs software will be installed.
 Destination=/home/user/Xilinx
 
 # Choose the Products/Devices the you would like to install.
-Modules=Virtex UltraScale+ HBM:1,DocNav:1,Kintex UltraScale:1,Artix UltraScale+:1,Spartan-7:1,Artix-7:1,Virtex UltraScale+:1,Vitis Model Composer(Xilinx Toolbox for MATLAB and Simulink. Includes the functionality of System Generator for DSP):1,Zynq UltraScale+ MPSoC:1,Zynq-7000:1,Virtex UltraScale+ 58G:1,Kintex-7:1,Install Devices for Kria SOMs and Starter Kits:1,Kintex UltraScale+:1
+Modules=Virtex UltraScale+ HBM:1,Kintex UltraScale:1,Vitis Networking P4:0,Artix UltraScale+:1,Spartan-7:1,Artix-7:1,Virtex UltraScale+:1,Vitis Model Composer(Toolbox for MATLAB and Simulink. Includes the functionality of System Generator for DSP):1,DocNav:1,Zynq UltraScale+ MPSoC:1,Zynq-7000:1,Virtex UltraScale+ 58G:1,Vitis Embedded Development:0,Kintex-7:1,Install Devices for Kria SOMs and Starter Kits:1,Kintex UltraScale+:1
 
 # Choose the post install scripts you'd like to run as part of the finalization step. Please note that some of these scripts may require user interaction during runtime.
 InstallOptions=
@@ -20,7 +20,7 @@ CreateProgramGroupShortcuts=1
 ProgramGroupFolder=Xilinx Design Tools
 
 # Choose whether shortcuts will be created for All users or just the Current user. Shortcuts can be created for all users only if you run the installer as administrator.
-CreateShortcutsForAllUsers=1
+CreateShortcutsForAllUsers=0
 
 # Choose whether shortcuts will be created on the desktop or not.
 CreateDesktopShortcuts=1

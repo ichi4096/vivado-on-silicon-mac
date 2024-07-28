@@ -1,0 +1,6 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Name=Launch Start Script
+Comment=Launch Start Script
+Exec=/usr/bin/lxterminal -e '/home/user/scripts/de_start.sh'

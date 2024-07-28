@@ -20,7 +20,7 @@ You will also need the Vivado installer file (the "Linux® Self Extracting Web I
 
 ### Installation
 1. Download this [tool](https://github.com/ichi4096/vivado-on-silicon-mac/archive/refs/heads/main.zip).
-2. Extract the ZIP by double-clicking it.
+2. Extract the ZIP file.
 3. Copy the Vivado installer into the extracted folder.
 4. Open a terminal. Then copy & paste:
 ```
@@ -29,7 +29,7 @@ caffeinate -dim zsh ./scripts/setup.sh
 ```
 5. Follow the instructions (in yellow) from the terminal.
 
-Note that the installation requires You to log into Your AMD account.
+Note that the installation requires You to log into Your AMD account. When asked to, allow "Terminal" to access data of other apps (the installation may succeed regardless).
 
 If You know what You're doing, you don't have to follow these steps rigidly. For example, You can rename the downloaded folder and place it wherever You like, You can download via `git`, modify the configurations and scripts etc... But the above instructions should work without any modifications.
 

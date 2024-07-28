@@ -1,9 +1,0 @@
-This is a daemon that listens to "xilinx_xvc" (xilinx virtual cable) traffic and 
-operates JTAG over an FTDI in bitbang mode.
-
-This version is hardcoded to use an FTDI cable with an FT2232C chip. It does
-not use MPSSE but rather bitbang mode. It uses ftdi_write_async which might
-not be available on your platform. You can use the (much slower) non-async
-version instead.
-
-Have fun!

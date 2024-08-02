@@ -7,6 +7,7 @@ The supported versions are:
 - 2022.2
 - 2023.1
 - 2023.2
+- 2024.1
 
 Due to unexpected behaviour in Rosetta emulation, most versions of macOS 14 (including 14.5) are not supported. macOS 13 may work, but the above versions were tested on macOS 15.
 
@@ -31,8 +32,6 @@ caffeinate -dim zsh ./scripts/setup.sh
 
 Note that the installation requires You to log into Your AMD account. When asked to, allow "Terminal" to access data of other apps (the installation may succeed regardless).
 
-If You know what You're doing, you don't have to follow these steps rigidly. For example, You can rename the downloaded folder and place it wherever You like, You can download via `git`, modify the configurations and scripts etc... But the above instructions should work without any modifications.
-
 ### Usage
 Run
 ```
@@ -45,6 +44,18 @@ USB flashing support is limited, see the "USB Connection" paragraph below.
 If you want to exchange files with the container, you need to store them inside the "vivado-on-silicon-mac-main" folder. Inside Vivado, the files will be accessible via the "/home/user" folder.
 
 You can allocate more/less memory and CPU resources to Vivado by going to the Resources tab in the Docker settings.
+
+### Notes
+
+If the installation fails or Vivado crashes, consider:
+- deleting the folder and go through the above steps again
+- establishing a more reliable internet connection
+- trying a different version of Vivado
+- increasing RAM / Swap / CPU allocations in the Docker settings.
+
+You may download via `git` instead of downloading the ZIP file and/or modify the scripts. The installation is wholly contained in the repository folder, which is exposed in the Docker container as the `/home/user` folder.
+
+Installation on external storage media may work but can cause issues, such as a file system (like FAT32, exFAT, NTFS) that does not support UNIX file permissions.
 
 ## Installing other software
 If you want to use additional Ubuntu packages, specify them in the Dockerfile. If you want to install further AMD / Xilinx software, you can do so by copying the corresponding installer into the folder containing the Vivado installation and launching it via the GUI. __Attention!__ You must install it into the folder `/home/user/Xilinx` because any data outside of `/home/user` does not persist between VM reboots. You can even skip installing Vivado entirely by commenting out the last line of `setup.sh`. I do not plan on supporting this out of the box.

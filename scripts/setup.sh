@@ -67,6 +67,12 @@ then
 fi
 
 # Make the scripts executable
+if ! xattr -d com.apple.quarantine "$script_dir/xvcd/bin/xvcd"
+then
+	f_echo "You need to remove the quarantine attribute from $script_dir/xvcd/bin/xvcd manually."
+	wait_for_user_input
+fi
+
 if ! chmod +x "$script_dir"/*.sh "$script_dir/xvcd/bin/xvcd" "$installation_binary"
 then
 	f_echo "Error making the scripts executable."

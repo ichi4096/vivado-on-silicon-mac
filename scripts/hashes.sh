@@ -12,11 +12,8 @@ declare -A web_hashes=(
     ["9bf473b6be0b8531e70fd3d5c0fe4817"]=202220
     ["e47ad71388b27a6e2339ee82c3c8765f"]=202310
     ["b8c785d03b754766538d6cde1277c4f0"]=202320
+    ["8b0e99a41b851b50592d5d6ef1b1263d"]=202410
 )
-
-# ["8b0e99a41b851b50592d5d6ef1b1263d"]=202410
-# 2024.1 somehow crashes the whole Docker Engine
-
 # hashes for the full installer
 # not tested yet
 declare -A sfd_hashes=()

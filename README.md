@@ -19,6 +19,11 @@ You first need to install [Docker®](https://www.docker.com/products/docker-desk
 
 You will also need the Vivado installer file (the "Linux® Self Extracting Web Installer").
 
+You may have to reinstall the Rosetta 2 on your Mac, because [it may fail to build due to the illegal compiler instructions](https://github.com/docker/for-mac/issues/7255). To *possibly* fix this use the following in the terminal:
+```
+softwareupdate --install-rosetta --agree-to-license
+```
+
 ### Installation
 1. Download this [tool](https://github.com/ichi4096/vivado-on-silicon-mac/archive/refs/heads/main.zip).
 2. Extract the ZIP file.

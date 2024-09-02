@@ -3,11 +3,17 @@
 FROM --platform=linux/amd64 ubuntu:22.04
 RUN apt update && apt upgrade -y
 
+# Fix the error of build failing due to not having the frontend installed
+RUN apt-get install dialog apt-utils -y
+
+# Check and install ca-certificates earlier if Rosetta gets broken
+RUN apt -y install ca-certificates
+
 # install gui
 RUN apt install -y --no-install-recommends --allow-unauthenticated \
 dbus dbus-x11 x11-utils xorg alsa-utils mesa-utils net-tools \
 libgl1-mesa-dri gtk2-engines lxappearance fonts-droid-fallback sudo firefox \
-ubuntu-gnome-default-settings ca-certificates curl gnupg lxde arc-theme \
+ubuntu-gnome-default-settings curl gnupg lxde arc-theme \
 gtk2-engines-murrine gtk2-engines-pixbuf gnome-themes-standard nano xterm
 
 # install dependencies for Vivado

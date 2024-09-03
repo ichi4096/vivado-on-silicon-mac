@@ -26,11 +26,14 @@ done
 
 # Run installer
 f_echo "You successfully logged into your account. The installation will begin now."
-if /home/user/installer/xsetup -c "/home/user/scripts/install_configs/$vivado_version.txt" -b Install -a XilinxEULA,3rdPartyEULA
+eula_args="XilinxEULA,3rdPartyEULA"
+[ "$vivado_version" = "202110" ] && eula_args="${eula_args},WebTalkTerms"
+
+if /home/user/installer/xsetup -c "/home/user/scripts/install_configs/${vivado_version}.txt" -b Install -a "${eula_args}"
 then
     f_echo "Vivado was successfully installed."
     f_echo "Run start_container.sh to launch it."
 else
-    f_echo "An error occured during installation. Please run cleanup.sh and try again."
-    exit1
+    f_echo "An error occurred during installation. Please run cleanup.sh and try again."
+    exit 1
 fi

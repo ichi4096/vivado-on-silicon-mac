@@ -4,6 +4,7 @@ This is a tool for installing [Vivado™](https://www.xilinx.com/support/downloa
 *Updated for 2024!*
 
 The supported versions are:
+- 2021.1
 - 2022.2
 - 2023.1
 - 2023.2

@@ -17,12 +17,10 @@ Expect the installation process to last about one to two hours and download ~20 
 ### Preparations
 You first need to install [Docker®](https://www.docker.com/products/docker-desktop/) (make sure to choose "Apple Chip" instead of "Intel Chip"). You may find it useful to disable the option "Open Docker Dashboard when Docker Desktop starts".
 
+Rossetta must be installed on your Mac. The installer will ask you to install it if it is not already installed.
+
 You will also need the Vivado installer file (the "Linux® Self Extracting Web Installer").
 
-You may have to reinstall the Rosetta 2 on your Mac, because [it may fail to build due to the illegal compiler instructions](https://github.com/docker/for-mac/issues/7255). To *possibly* fix this use the following in the terminal:
-```
-softwareupdate --install-rosetta --agree-to-license
-```
 
 ### Installation
 1. Download this [tool](https://github.com/ichi4096/vivado-on-silicon-mac/archive/refs/heads/main.zip).

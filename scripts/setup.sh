@@ -7,6 +7,39 @@ source "$script_dir/header.sh"
 # Make sure that the script is run in macOS and not the Docker container
 validate_macos
 
+# Check if Rosetta is installed
+if /usr/bin/pgrep -q oahd || /usr/bin/pgrep -q oahd-bin
+then
+  f_echo "Rosetta is installed! If there's illegal instruction compile error, try reinstall!"
+else
+  f_echo "Rosetta is not installed!"
+  # Check the consent of the user
+  f_echo "Do you want to install Rosetta?"
+  f_echo "1. Yes"
+  f_echo "2. No"
+  read rosetta_install
+  case $rosetta_install in
+    1)
+      f_echo "Installing Rosetta..."
+      if ! softwareupdate --install-rosetta
+      then
+        f_echo "Error installing Rosetta."
+        exit 1
+      fi
+      f_echo "Rosetta was successfully installed."
+      ;;
+    2)
+      f_echo "Rosetta is required to run the Docker container."
+      f_echo "Please install Rosetta and run this script again."
+      exit 1
+      ;;
+    *)
+      f_echo "Invalid option."
+      exit 1
+      ;;
+  esac
+fi
+
 # Make sure there are no previous installations in this folder
 if [ -d "$script_dir/../Xilinx" ]
 then

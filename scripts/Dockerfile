@@ -4,7 +4,10 @@ FROM --platform=linux/amd64 ubuntu:22.04
 RUN apt update && apt upgrade -y
 
 # Fix the error of build failing due to not having the frontend installed
-RUN apt-get install dialog apt-utils -y
+# This enviroment auto fallbacks to noninteractive mode, with the declaration following this guidance:
+# https://bobcares.com/blog/debian_frontendnoninteractive-docker/
+# https://github.com/moby/moby/issues/4032#issuecomment-34597177
+ARG DEBIAN_FRONTEND=noninteractive
 
 # Check and install ca-certificates earlier if Rosetta gets broken
 RUN apt -y install ca-certificates

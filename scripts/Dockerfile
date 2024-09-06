@@ -4,20 +4,20 @@ FROM --platform=linux/amd64 ubuntu:22.04
 RUN apt-get update && apt-get upgrade -y
 
 # install gui
-RUN apt-get install -y --no-install-recommends --allow-unauthenticated \
+RUN apt-get install -y --no-install-recommends \
     dbus dbus-x11 x11-utils xorg alsa-utils mesa-utils net-tools \
     libgl1-mesa-dri gtk2-engines lxappearance fonts-droid-fallback sudo firefox \
     ubuntu-gnome-default-settings ca-certificates curl gnupg lxde arc-theme \
     gtk2-engines-murrine gtk2-engines-pixbuf gnome-themes-standard nano xterm
 
 # install dependencies for Vivado
-RUN apt-get install -y --no-install-recommends --allow-unauthenticated \
+RUN apt-get install -y --no-install-recommends \
     python3-pip python3-dev build-essential git gcc-multilib g++ \
     ocl-icd-opencl-dev libjpeg62-dev libc6-dev-i386 graphviz make \
     unzip libtinfo5 xvfb libncursesw5 locales libswt-gtk-4-jni
 
 # install vnc server (with recommended installs)
-RUN apt-get install -y --allow-unauthenticated \
+RUN apt-get install -y \
     tigervnc-standalone-server tigervnc-xorg-extension
 
 # create user "user" with password "password"

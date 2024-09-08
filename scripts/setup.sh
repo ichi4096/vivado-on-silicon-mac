@@ -12,23 +12,21 @@ if /usr/bin/pgrep -q oahd || /usr/bin/pgrep -q oahd-bin
 then
   f_echo "Rosetta is installed! If there's illegal instruction compile error, try reinstall!"
 else
-  f_echo "Rosetta is not installed!"
+  f_echo "Rosetta is not installed (required)!"
   # Check the consent of the user
-  f_echo "Do you want to install Rosetta?"
-  f_echo "1. Yes"
-  f_echo "2. No"
+  f_echo "Do you want to install Rosetta? Agreeing assumes that you also agree with its license. (Y/n)"
   read rosetta_install
   case $rosetta_install in
-    1)
+    [yY]|[yY][eE]*)
       f_echo "Installing Rosetta..."
-      if ! softwareupdate --install-rosetta
+      if ! softwareupdate --install-rosetta --agree-to-license
       then
         f_echo "Error installing Rosetta."
         exit 1
       fi
       f_echo "Rosetta was successfully installed."
       ;;
-    2)
+    [nN]|[nN][oO]*)
       f_echo "Rosetta is required to run the Docker container."
       f_echo "Please install Rosetta and run this script again."
       exit 1

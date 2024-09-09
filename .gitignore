@@ -1,2 +1,14 @@
 .DS_Store
 *.bin
+*Xilinx/
+.cache/
+.config/
+.java/
+.local/
+Desktop/
+installer/
+.XIC.lock
+.Xauthority
+.dbus/
+.vnc/
+.xsession-errors

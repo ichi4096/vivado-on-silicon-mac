@@ -1,5 +1,5 @@
 # vivado-on-silicon-mac
-This is a tool for installing [Vivado™](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools.html) on Arm®-based Apple silicon Macs in a Rosett-enabled virtual machine. It is in no way associated with Xilinx or AMD.
+This is a tool for installing [Vivado™](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools.html) on Arm®-based Apple silicon Macs in a Rosetta-enabled virtual machine. It is in no way associated with Xilinx or AMD.
 
 *Updated for 2024!*
 

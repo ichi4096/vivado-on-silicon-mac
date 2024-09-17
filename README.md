@@ -4,6 +4,7 @@ This is a tool for installing [Vivado™](https://www.xilinx.com/support/downloa
 *Updated for 2024!*
 
 The supported versions are:
+- 2021.1
 - 2022.2
 - 2023.1
 - 2023.2
@@ -93,6 +94,10 @@ This version of xvcd only supports the FT2232C chip. There are forks of this sof
 The repository's contents are licensed under the Creative Commons Zero v1.0 Universal license.
 
 Note that the scripts are configured such that you automatically agree to Xilinx' and 3rd party EULAs (which can be obtained by extracting the installer yourself) by running them. You also automatically agree to [Apple's software licence agreement](https://www.apple.com/legal/sla/) for Rosetta 2.
+
+If you are installing Vivado version 2021.1:
+- WebTalk data collection is enabled, and you automatically agree to the corresponding terms.
+- For more information, see: https://docs.amd.com/r/2021.1-English/ug973-vivado-release-notes-install-license/WebTalk-Participation.
 
 This repository contains the modified source code of [xvcd](https://github.com/tmbinc/xvcd) as well as a compiled version which is statically linked against [libusb](https://libusb.info/) and [libftdi](https://www.intra2net.com/en/developer/libftdi/). This is in accordance to the [LGPL Version 2.1](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html), under which both of those libraries are licensed.
 

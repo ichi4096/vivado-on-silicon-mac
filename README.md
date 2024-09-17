@@ -1,5 +1,5 @@
 # vivado-on-silicon-mac
-This is a tool for installing [Vivado™](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools.html) on Arm®-based Apple silicon Macs in a Rosetta-enabled virtual machine. It is in no way associated with Xilinx or AMD.
+This is a tool for installing [Vivado™](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools.html) on Arm®-based Apple Silicon Macs in a Rosetta-enabled virtual machine. It is in no way associated with Xilinx or AMD.
 
 *Updated for 2024!*
 
@@ -18,7 +18,10 @@ Expect the installation process to last about one to two hours and download ~20 
 ### Preparations
 You first need to install [Docker®](https://www.docker.com/products/docker-desktop/) (make sure to choose "Apple Chip" instead of "Intel Chip"). You may find it useful to disable the option "Open Docker Dashboard when Docker Desktop starts".
 
+Rossetta must be installed on your Mac. The installer will ask you to install it if it is not already installed.
+
 You will also need the Vivado installer file (the "Linux® Self Extracting Web Installer").
+
 
 ### Installation
 1. Download this [tool](https://github.com/ichi4096/vivado-on-silicon-mac/archive/refs/heads/main.zip).

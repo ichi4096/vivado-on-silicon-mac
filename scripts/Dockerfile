@@ -3,11 +3,20 @@
 FROM --platform=linux/amd64 ubuntu:22.04
 RUN apt-get update && apt-get upgrade -y
 
+# Fix the error of build failing due to not having the frontend installed
+# This enviroment auto fallbacks to noninteractive mode, with the declaration following this guidance:
+# https://bobcares.com/blog/debian_frontendnoninteractive-docker/
+# https://github.com/moby/moby/issues/4032#issuecomment-34597177
+ARG DEBIAN_FRONTEND=noninteractive
+
+# Check and install ca-certificates earlier if Rosetta gets broken
+RUN apt -y install ca-certificates
+
 # install gui
 RUN apt-get install -y --no-install-recommends \
     dbus dbus-x11 x11-utils xorg alsa-utils mesa-utils net-tools \
     libgl1-mesa-dri gtk2-engines lxappearance fonts-droid-fallback sudo firefox \
-    ubuntu-gnome-default-settings ca-certificates curl gnupg lxde arc-theme \
+    ubuntu-gnome-default-settings curl gnupg lxde arc-theme \
     gtk2-engines-murrine gtk2-engines-pixbuf gnome-themes-standard nano xterm
 
 # install dependencies for Vivado

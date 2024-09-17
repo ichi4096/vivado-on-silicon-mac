@@ -10,7 +10,7 @@ start_docker
 
 # Build the Docker image according to the Dockerfile
 f_echo "Building Docker image..."
-if ! docker build -t x64-linux "$script_dir"
+if ! docker build --platform linux/amd64 -t x64-linux "$script_dir"
 then
 	f_echo "Docker image generation failed!"
 	exit 1

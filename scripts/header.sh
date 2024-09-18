@@ -33,6 +33,14 @@ function validate_linux {
     fi
 }
 
+function validate_internet {
+    if ! ping -q -c1 google.com &>/dev/null
+    then
+        f_echo "Internet connection required."
+        exit 1
+    fi
+}
+
 function wait_for_user_input {
     f_echo "Press Enter to continue..."
     read

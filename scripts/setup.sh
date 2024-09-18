@@ -7,35 +7,11 @@ source "$script_dir/header.sh"
 # Make sure that the script is run in macOS and not the Docker container
 validate_macos
 
-# Check if Rosetta is installed
-if /usr/bin/pgrep -q oahd || /usr/bin/pgrep -q oahd-bin
+# Make sure permissions are right
+if [[ "$current_user" == "root" ]]
 then
-  f_echo "Rosetta is installed! If there's illegal instruction compile error, try reinstall!"
-else
-  f_echo "Rosetta is not installed (required)!"
-  # Check the consent of the user
-  f_echo "Do you want to install Rosetta? Agreeing assumes that you also agree with its license. (Y/n)"
-  read rosetta_install
-  case $rosetta_install in
-    [yY]|[yY][eE]*)
-      f_echo "Installing Rosetta..."
-      if ! softwareupdate --install-rosetta --agree-to-license
-      then
-        f_echo "Error installing Rosetta."
-        exit 1
-      fi
-      f_echo "Rosetta was successfully installed."
-      ;;
-    [nN]|[nN][oO]*)
-      f_echo "Rosetta is required to run the Docker container."
-      f_echo "Please install Rosetta and run this script again."
-      exit 1
-      ;;
-    *)
-      f_echo "Invalid option."
-      exit 1
-      ;;
-  esac
+	f_echo "Do not execute this script as root."
+	exit 1
 fi
 
 # Make sure there are no previous installations in this folder
@@ -45,12 +21,32 @@ then
 	exit 1
 fi
 
-# Make sure permissions are right
-if [[ "$current_user" == "root" ]]
-then
-	f_echo "Do not execute this script as root."
+validate_internet
+
+f_echo "Advancing with the setup requires the following:"
+f_echo "- Agreeing to Xilinx'/AMD's EULAs (which can be obtained by extracting the installation binary)"
+f_echo "- Enabling WebTalk data collection for version 2021.1 and agreeing to corresponding terms"
+f_echo "- Installation of Rosetta 2 and agreeing to Apple's corresponding software license agreement"
+f_echo "Proceed [Y/n]?"
+read rosetta_install
+case $rosetta_install in
+[yY]|[yY][eE]*)
+	f_echo "Installing Rosetta..."
+	if ! softwareupdate --install-rosetta --agree-to-license
+	then
+		f_echo "Error installing Rosetta."
+		exit 1
+	fi
+	;;
+[nN]|[nN][oO]*)
+	f_echo "Aborting setup."
 	exit 1
-fi
+	;;
+*)
+	f_echo "Invalid option."
+	exit 1
+	;;
+esac
 
 # Get Vivado installation file
 f_echo "You need to put the Vivado installation file into this folder if you have not done so already."
@@ -98,10 +94,13 @@ then
 fi
 
 # Make the scripts executable
-if ! xattr -d com.apple.quarantine "$script_dir/xvcd/bin/xvcd"
+if xattr -p com.apple.quarantine "$script_dir/xvcd/bin/xvcd" &>/dev/null
 then
-	f_echo "You need to remove the quarantine attribute from $script_dir/xvcd/bin/xvcd manually."
-	wait_for_user_input
+	if ! xattr -d com.apple.quarantine "$script_dir/xvcd/bin/xvcd"
+	then
+		f_echo "You need to remove the quarantine attribute from $script_dir/xvcd/bin/xvcd manually."
+		wait_for_user_input
+	fi
 fi
 
 if ! chmod +x "$script_dir"/*.sh "$script_dir/xvcd/bin/xvcd" "$installation_binary"

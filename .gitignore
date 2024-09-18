@@ -13,3 +13,4 @@ installer/
 .dbus/
 .vnc/
 .xsession-errors
+scripts/install_bin

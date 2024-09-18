@@ -3,6 +3,7 @@
 *Xilinx/
 .cache/
 .config/
+.fontconfig/
 .java/
 .local/
 Desktop/

@@ -18,7 +18,7 @@ Expect the installation process to last about one to two hours and download ~20 
 ### Preparations
 You first need to install [Docker®](https://www.docker.com/products/docker-desktop/) (make sure to choose "Apple Chip" instead of "Intel Chip"). You may find it useful to disable the option "Open Docker Dashboard when Docker Desktop starts".
 
-Rossetta must be installed on your Mac. The installer will ask you to install it if it is not already installed.
+Rosetta must be installed on your Mac. The installer will ask you to install it if it is not already installed.
 
 You will also need the Vivado installer file (the "Linux® Self Extracting Web Installer").
 
@@ -93,7 +93,7 @@ This version of xvcd only supports the FT2232C chip. There are forks of this sof
 ## License, copyright and trademark information
 The repository's contents are licensed under the Creative Commons Zero v1.0 Universal license.
 
-Note that the scripts are configured such that you automatically agree to Xilinx' and 3rd party EULAs (which can be obtained by extracting the installer yourself) by running them. You also automatically agree to [Apple's software licence agreement](https://www.apple.com/legal/sla/) for Rosetta 2.
+Note that the scripts are configured such that you automatically agree to Xilinx' and 3rd party EULAs (which can be obtained by extracting the installer yourself) by running them. You also automatically agree to [Apple's software license agreement](https://www.apple.com/legal/sla/) for Rosetta 2.
 
 If you are installing Vivado version 2021.1:
 - WebTalk data collection is enabled, and you automatically agree to the corresponding terms.

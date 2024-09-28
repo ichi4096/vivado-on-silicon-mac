@@ -28,15 +28,10 @@ f_echo "- Agreeing to Xilinx'/AMD's EULAs (which can be obtained by extracting t
 f_echo "- Enabling WebTalk data collection for version 2021.1 and agreeing to corresponding terms"
 f_echo "- Installation of Rosetta 2 and agreeing to Apple's corresponding software license agreement"
 f_echo "Proceed [Y/n]?"
-read rosetta_install
-case $rosetta_install in
+read user_consent
+case $user_consent in
 [yY]|[yY][eE]*)
-	f_echo "Installing Rosetta..."
-	if ! softwareupdate --install-rosetta --agree-to-license
-	then
-		f_echo "Error installing Rosetta."
-		exit 1
-	fi
+	f_echo "Continuing setup..."
 	;;
 [nN]|[nN][oO]*)
 	f_echo "Aborting setup."
@@ -47,6 +42,22 @@ case $rosetta_install in
 	exit 1
 	;;
 esac
+
+# Check if the Mac is Intel or Apple Silicon
+if [[ "$(uname -m)" == "x86_64" ]]; then
+	f_echo "Mac is Intel-based. Rosetta installation is not required."
+else
+	if arch -arch x86_64 uname -m > /dev/null 2>&1; then
+		f_echo "Rosetta is already installed."
+	else
+		f_echo "Rosetta is not installed."
+		f_echo "Proceeding with Rosetta installation..."
+		if ! softwareupdate --install-rosetta --agree-to-license; then
+			f_echo "Error installing Rosetta."
+			exit 1
+		fi
+	fi
+fi
 
 # Get Vivado installation file
 f_echo "You need to put the Vivado installation file into this folder if you have not done so already."

@@ -10,7 +10,7 @@ cd $script_dir/..
 to_remove=(".cache" ".dbus" ".local" ".vnc" "Xilinx" ".Xilinx"
 "Desktop" "installer" ".bash_history" ".lesshst" ".sudo_as_admin_successful"
 ".Xauthority" ".xsession-errors" ".XIC.lock" ".mozilla" ".java" ".config"
-".fontconfig" )
+".fontconfig")
 for file in ${to_remove[@]}
 do
     rm -rf $file

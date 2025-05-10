@@ -68,6 +68,7 @@ do
 	# Get the absolute path to the file
 	f_echo "Then, drag and drop the Vivado installation binary into this terminal window and press Enter: "
 	read installation_binary
+	
 	# check if it is accessible from the container
 	parent_dir=$(dirname "$script_dir")
 	if ! [[ $installation_binary == $parent_dir/* ]]
@@ -75,18 +76,39 @@ do
 		f_echo "You need to move the installation binary into the folder!"
 		continue
 	fi
-	# check file hash
-	file_hash=$(md5 -q "$installation_binary")
+
+	# check for stored hash, generate  if not
+	if [ -f "$script_dir/../hash" ]
+	then
+		f_echo "Using stored hash, delete "hash" and rerun if installer file has changed."
+		wait_for_user_input
+		file_hash=$(tr -d "\n\r\t " < "$script_dir/../hash")
+	else
+		f_echo "Generating hash, this may take a while..."
+		file_hash=$(md5 -q "$installation_binary")
+	fi
+
+	# check if the hash is valid
 	set_vivado_version_from_hash "$file_hash"
 	if [ "$?" -eq 0 ]
 	then
 		f_echo "Valid file provided. Detected version $vivado_version"
+
+		# save hash calculaiton to save time in future for the same file
+		echo -n "$file_hash" > "$script_dir/../hash"
 		break
 	else
 		f_echo "File corrupted or version not supported."
 		continue
 	fi
 done
+
+# extract tar in macos for speed
+if [ "${installation_binary##*.}" = "tar" ]; then
+    mkdir $script_dir/../installer
+	f_echo "Extracting tar, this may take a while..."
+    tar -xf "$installation_binary" -C "$script_dir/../installer" --strip-components 1
+fi
 
 # write file path to "install_bin"
 install_bin_path="${installation_binary#$parent_dir}"

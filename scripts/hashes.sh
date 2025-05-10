@@ -14,14 +14,16 @@ declare -A web_hashes=(
     ["e47ad71388b27a6e2339ee82c3c8765f"]=202310
     ["b8c785d03b754766538d6cde1277c4f0"]=202320
     ["8b0e99a41b851b50592d5d6ef1b1263d"]=202410
+    ["20c806793b3ea8d79273d5138fbd195f"]=202420
 )
 # hashes for the full installer
 # not tested yet
-declare -A sfd_hashes=()
-#declare -A sfd_hashes=(
-#    ["0bf810cf5eaa28a849ab52b9bfdd20a5"]=202210
-#    ["4b4e84306eb631fe67d3efb469122671"]=202220
-#    ["f2011ceba52b109e3551c1d3189a8c9c"]=202310
-#    ["64d64e9b937b6fd5e98b41811c74aab2"]=202320
-#    ["372c0b184e32001137424e395823de3c"]=202410
-#)
+# declare -A sfd_hashes=()
+declare -A sfd_hashes=(
+   ["0bf810cf5eaa28a849ab52b9bfdd20a5"]=202210
+   ["4b4e84306eb631fe67d3efb469122671"]=202220
+   ["f2011ceba52b109e3551c1d3189a8c9c"]=202310
+   ["64d64e9b937b6fd5e98b41811c74aab2"]=202320
+   ["372c0b184e32001137424e395823de3c"]=202410
+   ["0ca31a787bbdff82b55213522e604446"]=202420
+)

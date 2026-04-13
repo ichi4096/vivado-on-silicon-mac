@@ -17,11 +17,6 @@ declare -A web_hashes=(
 )
 # hashes for the full installer
 # not tested yet
-declare -A sfd_hashes=()
-#declare -A sfd_hashes=(
-#    ["0bf810cf5eaa28a849ab52b9bfdd20a5"]=202210
-#    ["4b4e84306eb631fe67d3efb469122671"]=202220
-#    ["f2011ceba52b109e3551c1d3189a8c9c"]=202310
-#    ["64d64e9b937b6fd5e98b41811c74aab2"]=202320
-#    ["372c0b184e32001137424e395823de3c"]=202410
-#)
+declare -A sfd_hashes=(
+    ["abe838aa2e2d3d9b10fea94165e9a303"]=202520
+)

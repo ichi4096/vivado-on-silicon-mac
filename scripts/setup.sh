@@ -77,8 +77,7 @@ do
 	fi
 	# check file hash
 	file_hash=$(md5 -q "$installation_binary")
-	set_vivado_version_from_hash "$file_hash"
-	if [ "$?" -eq 0 ]
+	if set_vivado_version_from_hash "$file_hash" || set_vivado_version_from_filename "$installation_binary"
 	then
 		f_echo "Valid file provided. Detected version $vivado_version"
 		break
@@ -151,8 +150,17 @@ echo ""
 # copy de_start.desktop autostart file
 mkdir -p "$script_dir/../.config/autostart"
 cp "$script_dir/de_start.desktop" "$script_dir/../.config/autostart/de_start.desktop"
-mkdir "$script_dir/../Desktop"
+mkdir -p "$script_dir/../Desktop"
 
 # Start container
 f_echo "Now, the container is started (only terminal, no GUI) and the actual installation process begins."
+if docker ps --format '{{.Names}}' | grep -Fxq vivado_container
+then
+    f_echo "The Docker container 'vivado_container' is already running. Stop it first with: docker rm -f vivado_container"
+    exit 1
+fi
+if docker ps -a --format '{{.Names}}' | grep -Fxq vivado_container
+then
+    docker rm -f vivado_container > /dev/null 2>&1
+fi
 docker run --init -it --rm --name vivado_container --mount type=bind,source="$script_dir/..",target="/home/user" -p 127.0.0.1:5901:5901 --platform linux/amd64 x64-linux sudo -H -u user bash /home/user/scripts/install_vivado.sh

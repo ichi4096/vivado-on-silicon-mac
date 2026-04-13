@@ -1,7 +1,7 @@
 # vivado-on-silicon-mac
 This is a tool for installing [Vivado™](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools.html) on Arm®-based Apple Silicon Macs in a Rosetta-enabled virtual machine. It is in no way associated with Xilinx or AMD.
 
-*Updated for 2024!*
+*Updated for 2025!*
 
 The supported versions are:
 - 2021.1
@@ -9,6 +9,7 @@ The supported versions are:
 - 2023.1
 - 2023.2
 - 2024.1
+- 2025.2
 
 Due to unexpected behaviour in Rosetta emulation, most versions of macOS 14 (including 14.5) are not supported. macOS 13 may work, but the above versions were tested on macOS 15.
 

@@ -9,44 +9,95 @@ validate_macos
 function cannot_setup_docker {
     f_echo "Unfortunately, the script could not configure Docker automatically."
     f_echo "This means that you have to change the settings in the Docker Dashboard yourself:"
-    f_echo "Enable the Virtualization Framework, Rosetta emulation and set Swap to at least 2 GiB."
+    f_echo "Enable the Virtualization Framework, Rosetta emulation and raise Swap as high as Docker Desktop allows."
     f_echo "Restart Docker after applying the changes and then continue with the installation."
     wait_for_user_input
     exit 1
 }
 
-docker_settings_file="$HOME/Library/Group Containers/group.com.docker/settings.json"
+docker_backend_sock="$HOME/Library/Containers/com.docker.docker/Data/backend.sock"
+docker_settings_file="$HOME/Library/Group Containers/group.com.docker/settings-store.json"
+preferredSwapMiB=8192
 
-stop_docker
+function get_flat_settings {
+    curl -s --unix-socket "$docker_backend_sock" http://localhost/app/settings/flat
+}
 
-# check if the settings file is in the expected place
-if ! [ -f "$docker_settings_file" ]
+if [ -S "$docker_backend_sock" ]
 then
-    cannot_setup_docker
+    flat_settings=$(get_flat_settings)
+    if [ -n "$flat_settings" ]
+    then
+        current_swap=$(printf '%s' "$flat_settings" | python3 -c 'import json,sys; print(json.load(sys.stdin)["swapMiB"])')
+        use_vf=$(printf '%s' "$flat_settings" | python3 -c 'import json,sys; print(str(json.load(sys.stdin)["useVirtualizationFramework"]).lower())')
+        use_rosetta=$(printf '%s' "$flat_settings" | python3 -c 'import json,sys; print(str(json.load(sys.stdin)["useVirtualizationFrameworkRosetta"]).lower())')
+
+        grouped_settings=$(curl -s --unix-socket "$docker_backend_sock" http://localhost/app/settings/grouped)
+        max_swap=$(printf '%s' "$grouped_settings" | python3 -c 'import json,sys; print(json.load(sys.stdin)["vm"]["resources"]["swapMiB"]["max"])')
+
+        target_swap=$preferredSwapMiB
+        if [ "$max_swap" -lt "$target_swap" ]
+        then
+            target_swap=$max_swap
+        fi
+
+        if [ "$target_swap" -lt 4096 ]
+        then
+            f_echo "Docker Desktop only allows $target_swap MiB of swap on this machine."
+        fi
+
+        if [ "$current_swap" -lt "$target_swap" ] || [ "$use_vf" != "true" ] || [ "$use_rosetta" != "true" ]
+        then
+            payload=$(python3 - <<PY
+import json
+print(json.dumps({
+    "desktop": {
+        "useVirtualizationFramework": True,
+        "useVirtualizationFrameworkRosetta": {"value": True},
+    },
+    "vm": {
+        "resources": {
+            "swapMiB": {"value": $target_swap},
+        }
+    }
+}))
+PY
+)
+
+            if ! curl -s -X POST --unix-socket "$docker_backend_sock" \
+                http://localhost/app/settings \
+                -H "Content-Type: application/json" \
+                -d "$payload" > /dev/null
+            then
+                cannot_setup_docker
+            fi
+
+            docker desktop restart > /dev/null
+        fi
+
+        f_echo "Configured Docker successfully"
+        exit 0
+    fi
 fi
 
-# check if the attributes to be modified exist
-if grep "\"useVirtualizationFramework\":" "$docker_settings_file" > /dev/null \
-&& grep "\"useVirtualizationFrameworkRosetta\":" "$docker_settings_file" > /dev/null \
-&& grep "\"swapMiB\":" "$docker_settings_file" > /dev/null
+if [ -f "$docker_settings_file" ]
 then
-    :
-else
-    cannot_setup_docker
+    current_swap=$(python3 -c 'import json, pathlib; p=pathlib.Path("'"$docker_settings_file"'"); data=json.loads(p.read_text()); print(data.get("SwapMiB", data.get("swapMiB", 0)))')
+    if [ "$current_swap" -lt 4096 ]
+    then
+        python3 - <<PY
+import json
+from pathlib import Path
+
+path = Path("$docker_settings_file")
+data = json.loads(path.read_text())
+data["SwapMiB"] = max(int(data.get("SwapMiB", data.get("swapMiB", 0))), 4096)
+path.write_text(json.dumps(data, indent=2) + "\n")
+PY
+    fi
+
+    f_echo "Configured Docker successfully"
+    exit 0
 fi
 
-# enable Virtualization Framework
-sed -i "" "s/\"useVirtualizationFramework\": false/\"useVirtualizationFramework\": true/" "$docker_settings_file"
-
-# enable Rosetta emulation
-sed -i "" "s/\"useVirtualizationFrameworkRosetta\": false/\"useVirtualizationFrameworkRosetta\": true/" "$docker_settings_file"
-
-# set swap to minimum 4 GiB
-minSwap=4096
-swapMiB=$(cat "$docker_settings_file" | grep "\"swapMiB\"" | sed "s/[^0-9]//g")
-if [ "$swapMiB" -lt "$minSwap" ]
-then
-    sed -i "" "s/\"swapMiB\": [0-9]*/\"swapMiB\": $minSwap/" "$docker_settings_file"
-fi
-
-f_echo "Configured Docker successfully"
+cannot_setup_docker

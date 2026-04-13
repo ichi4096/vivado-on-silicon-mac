@@ -34,7 +34,7 @@ function validate_linux {
 }
 
 function validate_internet {
-    if ! ping -q -c1 google.com &>/dev/null
+    if ! curl -s --connect-timeout 5 https://www.google.com &>/dev/null
     then
         f_echo "Internet connection required."
         exit 1
@@ -86,6 +86,52 @@ function set_vivado_version_from_hash {
         exit 1
     fi
     return 0
+}
+
+function set_vivado_version_from_filename {
+    case "$(basename "$1")" in
+        *2021.1*)
+            vivado_version=202110
+            ;;
+        *2022.2*)
+            vivado_version=202220
+            ;;
+        *2023.1*)
+            vivado_version=202310
+            ;;
+        *2023.2*)
+            vivado_version=202320
+            ;;
+        *2024.1*)
+            vivado_version=202410
+            ;;
+        *2025.2*)
+            vivado_version=202520
+            ;;
+        *)
+            return 1
+            ;;
+    esac
+
+    return 0
+}
+
+function find_vivado_dir {
+    local candidate
+
+    for candidate in $(find /home/user/Xilinx \
+        -mindepth 2 -maxdepth 2 \
+        \( -path "/home/user/Xilinx/Vivado/*" -o -path "/home/user/Xilinx/*/Vivado" \) \
+        -type d 2>/dev/null | sort)
+    do
+        if [ -f "$candidate/settings64.sh" ] && [ -x "$candidate/bin/vivado" ]
+        then
+            printf '%s\n' "$candidate"
+            return 0
+        fi
+    done
+
+    return 1
 }
 
 # The actual resolution is stored in the file vnc_resolution

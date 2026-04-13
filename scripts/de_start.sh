@@ -9,13 +9,15 @@ validate_linux
 
 export LD_PRELOAD="/lib/x86_64-linux-gnu/libudev.so.1 /lib/x86_64-linux-gnu/libselinux.so.1 /lib/x86_64-linux-gnu/libz.so.1 /lib/x86_64-linux-gnu/libgdk-x11-2.0.so.0"
 
+vivado_dir=$(find_vivado_dir)
+
 # if Vivado is installed
-if [ -d "/home/user/Xilinx" ]
+if [ -n "$vivado_dir" ]
 then
 	# Make Vivado connect to the xvcd server running on macOS
-	/home/user/Xilinx/Vivado/*/bin/hw_server -e "set auto-open-servers     xilinx-xvc:host.docker.internal:2542" &
-	/home/user/Xilinx/Vivado/*/settings64.sh
-	/home/user/Xilinx/Vivado/*/bin/vivado
+	source "$vivado_dir/settings64.sh"
+	"$vivado_dir/bin/hw_server" -e "set auto-open-servers     xilinx-xvc:host.docker.internal:2542" &
+	"$vivado_dir/bin/vivado"
 else
 	f_echo "The installation is incomplete."
 	wait_for_user_input

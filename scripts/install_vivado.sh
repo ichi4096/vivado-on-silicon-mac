@@ -10,7 +10,14 @@ validate_linux
 install_bin_path=$(tr -d "\n\r\t " < "/home/user/scripts/install_bin")
 
 file_hash=($(md5sum "$install_bin_path"))
-set_vivado_version_from_hash "$file_hash"
+if ! set_vivado_version_from_hash "$file_hash"
+then
+	if ! set_vivado_version_from_filename "$install_bin_path"
+	then
+		f_echo "Unsupported installer file."
+		exit 1
+	fi
+fi
 
 # Extract installer
 f_echo "Extracting installer"
@@ -18,6 +25,7 @@ eval "$install_bin_path --target /home/user/installer --noexec"
 
 # Get AuthToken by repeating the following command until it succeeds
 f_echo "Log into your Xilinx account to download the necessary files."
+export JAVA_TOOL_OPTIONS="-Xmx2g"
 while ! /home/user/installer/xsetup -b AuthTokenGen
 do
 	f_echo "Your account information seems to be wrong. Please try logging in again."

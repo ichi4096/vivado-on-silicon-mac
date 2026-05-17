@@ -39,7 +39,12 @@ fi
 if /home/user/installer/xsetup -c "/home/user/scripts/install_configs/${vivado_version}.txt" -b Install -a "${eula_args}"
 then
     f_echo "Vivado was successfully installed."
-    f_echo "Run start_container.sh to launch it."
+    # Remove the extracted installer — it is ~1 GB and no longer needed.
+    # Vivado itself lives in /home/user/Xilinx (bind-mounted on the Mac) and
+    # persists across container restarts — no re-download required.
+    f_echo "Cleaning up extracted installer files..."
+    rm -rf /home/user/installer
+    f_echo "Run start_container.sh to launch Vivado."
 else
     f_echo "An error occurred during installation. Please run cleanup.sh and try again."
     exit 1

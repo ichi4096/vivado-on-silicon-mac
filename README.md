@@ -1,7 +1,7 @@
 # vivado-on-silicon-mac
 This is a tool for installing [Vivado™](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools.html) on Arm®-based Apple Silicon Macs in a Rosetta-enabled virtual machine. It is in no way associated with Xilinx or AMD.
 
-*Updated for 2024!*
+*Updated for 2025.2!*
 
 The supported versions are:
 - 2021.1
@@ -9,8 +9,13 @@ The supported versions are:
 - 2023.1
 - 2023.2
 - 2024.1
+- **2025.2** (and 2025.2.1 patch)
 
-Due to unexpected behaviour in Rosetta emulation, most versions of macOS 14 (including 14.5) are not supported. macOS 13 may work, but the above versions were tested on macOS 15.
+## Compatibility
+- **Apple Silicon**: M1, M2, M3, M4 and later chips are all supported.
+- **macOS**: macOS 15 (Sequoia) is recommended and tested. macOS 13 may work.  
+  ⚠️ Most versions of macOS 14 (Sonoma) are **not supported** due to Rosetta emulation bugs — the installer will warn you if you are on macOS 14.
+- The Docker container image is kept well under **8 GiB** (Vivado itself is installed to a bind-mounted folder, not inside the image).
 
 ## How to install
 Expect the installation process to last about one to two hours and download ~20 GB for the web installer.
@@ -66,7 +71,12 @@ If you want to use additional Ubuntu packages, specify them in the Dockerfile. I
 
 ## How it works
 ### Docker, Rosetta & VNC
-This collection of scripts creates an x64 Docker container running Linux® that is accelerated by [Rosetta 2](https://developer.apple.com/documentation/apple-silicon/about-the-rosetta-translation-environment) via the Apple Virtualization framework. The container has all the necessary libraries preinstalled for running Vivado. It is installed automatically given an installer file that the user must provide. GUI functionality is provided via VNC and the built-in "Screen Sharing" app.
+This collection of scripts creates an x64 Docker container running **Ubuntu 24.04** Linux that is accelerated by [Rosetta 2](https://developer.apple.com/documentation/apple-silicon/about-the-rosetta-translation-environment) via the Apple Virtualization framework. The container has all the necessary libraries preinstalled for running Vivado. It is installed automatically given an installer file that the user must provide. GUI functionality is provided via VNC and the built-in "Screen Sharing" app.
+
+The Docker container image is kept under **8 GiB** — Vivado itself is installed to the host-side bind-mounted folder (`/home/user/Xilinx`) and is therefore not part of the image.
+
+### Java heap limit
+Vivado and its installer are Java-based. The container sets `JAVA_TOOL_OPTIONS="-Xmx4096m -Xms512m"` so that the JVM heap is capped at **4 GiB**. This prevents out-of-memory kills during large syntheses and keeps overall memory consumption within the Docker resource limits you configure.
 
 ### USB connection
 A drawback of the Apple Virtualization framework is that there is no implementation for USB forwarding as of when I'm writing this. Therefore, these scripts set up the [Xilinx Virtual Cable protocol](https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/644579329/Xilinx+Virtual+Cable). Intended to let a computer connect to an FPGA plugged into a remote computer, it allows for the host system to run an XVC server (in this case a software called [xvcd](https://github.com/tmbinc/xvcd) by Felix Domke), to which the docker container can connect.

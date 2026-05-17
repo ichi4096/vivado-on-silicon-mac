@@ -1,0 +1,26 @@
+#### Vivado ML Standard Install Configuration — 2025.2 ####
+Edition=Vivado ML Standard
+
+Product=Vivado
+
+# Path where AMD FPGAs & Adaptive SoCs software will be installed.
+Destination=/home/user/Xilinx
+
+# Choose the Products/Devices you would like to install.
+# Includes all common device families plus new 2025.2 additions:
+#   Versal AI Edge Series Gen 2, Versal Prime Series Gen 2, Spartan UltraScale+
+#
+# NOTE: Module names are version-specific. If installation fails with
+# "module not found", run the installer with -b ConfigGen to export
+# the exact module list for your installer binary, then update this file.
+Modules=Virtex UltraScale+ HBM:1,Kintex UltraScale:1,Vitis Networking P4:0,Artix UltraScale+:1,Spartan-7:1,Artix-7:1,Virtex UltraScale+:1,Vitis Model Composer(A toolbox for Simulink):0,DocNav:1,Zynq UltraScale+ MPSoC:1,Zynq-7000:1,Virtex UltraScale+ 58G:1,Power Design Manager (PDM):0,Vitis Embedded Development:0,Kintex-7:1,Install Devices for Kria SOMs and Starter Kits:1,Kintex UltraScale+:1,Spartan UltraScale+:1,Versal AI Edge Series Gen 2:1,Versal Prime Series Gen 2:1
+
+# Choose the post install scripts you'd like to run as part of the finalization step.
+InstallOptions=
+
+## Shortcuts and File associations ##
+CreateProgramGroupShortcuts=1
+ProgramGroupFolder=Xilinx Design Tools
+CreateShortcutsForAllUsers=0
+CreateDesktopShortcuts=1
+CreateFileAssociation=1

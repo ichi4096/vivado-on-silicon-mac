@@ -7,6 +7,23 @@ source "$script_dir/header.sh"
 # Make sure that the script is run in macOS and not the Docker container
 validate_macos
 
+# Warn if running on macOS 14 — most 14.x releases have Rosetta emulation
+# bugs that can cause the installation or Vivado to crash. macOS 15 and later
+# are recommended for M3/M4 and newer chips.
+macos_major=$(sw_vers -productVersion | cut -d. -f1)
+if [[ "$macos_major" -eq 14 ]]; then
+    f_echo "WARNING: macOS 14 has known Rosetta emulation issues that may cause"
+    f_echo "installation failures or Vivado crashes. macOS 15 or later is recommended."
+    f_echo "Continue anyway [Y/n]?"
+    read macos_consent
+    case $macos_consent in
+    [nN]|[nN][oO]*)
+        f_echo "Aborting setup."
+        exit 1
+        ;;
+    esac
+fi
+
 # Make sure permissions are right
 if [[ "$current_user" == "root" ]]
 then
